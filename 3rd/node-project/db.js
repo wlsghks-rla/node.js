@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   // db를 사용하기위한 세션설정
   host: "localhost",
   user: "dev01",
-  password: "1234",
+  password: "dev01",
   database: "dev",
   connectionLimit: 10, // 한번에 접속할 수 있는 pool 갯수
 });

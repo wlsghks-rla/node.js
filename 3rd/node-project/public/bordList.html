@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>게시글목록</h3>
+    <table border="1px">
+      <thead>
+        <tr>
+          <th>글번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일자</th>
+        </tr>
+      </thead>
+      <tbody id="blist"></tbody>
+    </table>
+    <script>
+      // fetch 활용.
+      // db에 있는 건수만큼.
+      // 다하면 이미지까지 추가.
+      async function data() {
+        let resp = await fetch("http://localhost:3000/board/boards");
+        let result = await resp.json();
+        console.log(result);
+        return result;
+      }
+      data();
+    </script>
+  </body>
+</html>

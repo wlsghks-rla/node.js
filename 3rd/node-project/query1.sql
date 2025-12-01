@@ -1,4 +1,6 @@
-use dev; -- 사용할 db 선택.
+use dev;
+
+show tables; -- 사용할 db 선택.
 show tables;
 
 create table users (
@@ -23,15 +25,29 @@ where user_id = 'user02';
 
 delete from users where user_id = 'user02';
 
+update users
+set    user_nm = ''
+where user_id = '';
+
 create table board (
-  board_id int(20) not null,
+  board_id int(20) not null auto_increment,
   title varchar(100) not null,
   content    varchar(100) not null,
   author varchar(50) not null,
   create_date timestamp default current_timestamp on update current_timestamp, 
   primary key (board_id)
 );
-select * from board;
+select max(board_id) from board ;
 drop table board;
 
 insert into board (board_id, title, content, author) values(1, '1번 제목입니다', '1번 내용입니다', 'user01'); 
+
+update board
+set    author = ?
+where board_id = ?;
+
+delete from board
+where board_id = 3; -- 1201
+
+alter table board
+add column images varchar(500); -- 1201
