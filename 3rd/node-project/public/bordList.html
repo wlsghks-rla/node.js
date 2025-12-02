@@ -14,6 +14,7 @@
           <th>제목</th>
           <th>작성자</th>
           <th>작성일자</th>
+          <th>이미지</th>
         </tr>
       </thead>
       <tbody id="blist"></tbody>
@@ -22,13 +23,26 @@
       // fetch 활용.
       // db에 있는 건수만큼.
       // 다하면 이미지까지 추가.
-      async function data() {
+      async function boards() {
         let resp = await fetch("http://localhost:3000/board/boards");
         let result = await resp.json();
         console.log(result);
-        return result;
+
+        result.forEach(elem => {
+          console.log(elem);
+          const tr = document.createElement("tr");
+          let { board_id, title, author, create_date, images } = elem;
+          let data = { board_id, title, author, create_date, images };
+          console.log(data);
+          for (let prop in data) {
+            const td = document.createElement("td");
+            td.innerText = data[prop];
+            tr.appendChild(td);
+          }
+          document.querySelector("#blist").appendChild(tr);
+        });
       }
-      data();
+      boards();
     </script>
   </body>
 </html>
