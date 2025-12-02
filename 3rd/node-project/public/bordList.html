@@ -23,26 +23,54 @@
       // fetch 활용.
       // db에 있는 건수만큼.
       // 다하면 이미지까지 추가.
-      async function boards() {
-        let resp = await fetch("http://localhost:3000/board/boards");
-        let result = await resp.json();
-        console.log(result);
 
-        result.forEach(elem => {
-          console.log(elem);
-          const tr = document.createElement("tr");
-          let { board_id, title, author, create_date, images } = elem;
-          let data = { board_id, title, author, create_date, images };
-          console.log(data);
-          for (let prop in data) {
-            const td = document.createElement("td");
-            td.innerText = data[prop];
-            tr.appendChild(td);
-          }
-          document.querySelector("#blist").appendChild(tr);
-        });
+      function getImage(filename) {
+        return "/image/" + filename;
       }
-      boards();
+      // UTC -> 한국표시 -> 2025/12/01 09:06:46
+      function timeFormat(time) {
+        return new Date(time);
+      }
+      fetch("board/boards")
+        .then((resp) => resp.json())
+        .then((result) => {
+          console.log(result);
+          for (let board of result) {
+            console.log(timeFormat(board.create_date));
+            let imgSrc = "";
+            if (board.images) {
+              imgSrc = `<img src = '${getImage(board.images)}' width='100'>`;
+            }
+            let tbody = document.querySelector("#blist");
+            let tr = document.createElement("tr");
+            tr.innerHTML = `<td>${board.board_id}</td>
+                          <td>${board.title}</td>
+                          <td>${board.author}</td>
+                          <td>${board.create_date}</td>
+                          <td>${imgSrc}</td>`;
+            tbody.appendChild(tr);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // result.forEach((elem) => {
+      //   console.log(elem);
+      //   const tr = document.createElement("tr");
+      //   let { board_id, title, author, create_date, images } = elem;
+      //   let data = { board_id, title, author, create_date, images };
+      //   console.log(data);
+      //   for (let prop in data) {
+      //     const td = document.createElement("td");
+      //     td.innerText = data[prop];
+      //     tr.appendChild(td);
+      //   }
+      //   document.querySelector("#blist").appendChild(tr);
+      // });
+      // }
+
+      // boards();
     </script>
   </body>
 </html>

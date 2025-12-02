@@ -75,7 +75,7 @@ create table board (
   create_date timestamp default current_timestamp on update current_timestamp, 
   primary key (board_id)
 );
-select max(board_id) from board ;
+select * from board ;
 drop table board;
 
 insert into board (board_id, title, content, author) values(1, '1번 제목입니다', '1번 내용입니다', 'user01'); 
@@ -109,3 +109,36 @@ where board_id = 3; -- 1201
 
 alter table board
 add column images varchar(500); -- 1201
+
+create table customer (
+  id int(20) not null auto_increment,
+  name      varchar(250) not null,
+  email    varchar(100) not null,
+  phone    varchar(50) not null,
+  primary key (id)
+);-- 1202
+
+insert into customer set name="박수홍", email="su@email.com", phone="010-9090-9090";
+insert into customer set name="박종훈", email="jong@email.com", phone="010-8080-8080";
+insert into customer set name="박수홍", email="su@email.com", phone="010-9999-9999";
+
+select * from customer;
+
+create table center (
+  id int(20) not null,
+  center_name varchar(100) not null,
+  address varchar(300) not null,
+  phone_number varchar(100) not null,
+  sido varchar(100) not null,
+  primary key(id)
+  );
+  
+  insert into center 
+  values(1, 'test', 'test', 'test', 'test');
+  
+  drop table center;
+  
+  delete from center
+  where id = 1;
+  
+  select * from center;
