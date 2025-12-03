@@ -29,7 +29,9 @@
       }
       // UTC -> 한국표시 -> 2025/12/01 09:06:46
       function timeFormat(time) {
-        return new Date(time);
+        let dt = new Date(time);
+        let date = `${dt.getFullYear()}/${dt.getMonth + 1}/${dt.getDate()}`;
+        return date;
       }
       fetch("board/boards")
         .then((resp) => resp.json())

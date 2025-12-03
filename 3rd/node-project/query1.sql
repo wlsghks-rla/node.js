@@ -76,6 +76,7 @@ create table board (
   primary key (board_id)
 );
 select * from board ;
+SELECT * FROM board WHERE board_id = 1;
 drop table board;
 
 insert into board (board_id, title, content, author) values(1, '1번 제목입니다', '1번 내용입니다', 'user01'); 
