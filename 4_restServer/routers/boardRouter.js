@@ -26,18 +26,26 @@ router.get(`/boards/:bno`, async (req, res) => {
 router.post(`/boards`, async (req, res) => {
   const info = req.body; // method 가 post , put일경우 무조건 body. => get과 post의 차이.
   // get은 정보를 누구나 볼 수 있다(ex 옆서..) post 내용은 확인 불가(body)
+  console.log(req.body);
   let result = await boardServie.addInfo(info);
   res.send(result);
 });
 
 // 게시글 단건 수정 : boards/:bno + PUT
 router.put(`/boards/:bno`, async (req, res) => {
-  const info = req.params.bno;
+  const bId = req.params.bno;
+  let { author, content, title } = req.body;
+  let info = { author, content, title, bId };
   console.log(info);
-  let result = await boardServie.alterInfo(info);
+  let result = await boardServie.updateInfo(info);
   res.send(result);
 });
 
 // 게시글 단건 삭제 : boards/:bno + DELETE
+router.delete(`/boards/:bno`, async (req, res) => {
+  const bId = req.params.bno;
+  let result = await boardServie.delInfo(bId);
+  res.send(result);
+});
 
 module.exports = router; // 파일의 마지막 코드(필수!)

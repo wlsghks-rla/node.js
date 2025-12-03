@@ -34,9 +34,14 @@ FETCH함수에서 MERGE일 경우 사용 확률
 // 게시글 단건 수정.
 const putInfo = `
 UPDATE board
-SET    author = "test",
-       content = "test",
-       title = "test"
+SET    author = ?,
+       content = ?,
+       title = ?
+WHERE board_id = ?`;
+
+// 게시글 단건 삭제.
+const deleteInfo = `
+DELETE FROM board
 WHERE board_id = ?`;
 
 module.exports = {
@@ -44,4 +49,5 @@ module.exports = {
   selectById,
   insertInfo,
   putInfo,
+  deleteInfo,
 };
